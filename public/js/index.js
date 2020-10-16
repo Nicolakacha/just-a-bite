@@ -7,10 +7,11 @@ const formatter = new Intl.NumberFormat('zh-TW', {
 function initCart() {
   if (localStorage.number > 0) {
     document.querySelector('.count').classList.remove('hide');
-    document.querySelector('.count').innerText = localStorage.number;
   } else {
+    document.querySelector('.count').classList.add('hide');
     localStorage.setItem('number', 0);
   }
+  document.querySelector('.count').innerText = localStorage.number
 }
 
 function addCart(target) {
@@ -164,9 +165,7 @@ function removeProduct(target) {
     target.parentNode.parentNode.removeChild(target.parentNode);
     localStorage.removeItem(id);
     localStorage.number -= Number(removedItemQty);
-    if (localStorage.number == 0) {
-      document.querySelector('.count').classList.add('hide');
-    }
+    initCart();
   }
 }
 
