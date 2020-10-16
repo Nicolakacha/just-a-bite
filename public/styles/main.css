@@ -1,7 +1,7 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
 :root {
   --btn-bg-colour: #ff7286;
-  --btn-hover-colour: #ff0026;
+  --btn-hover-colour: #fd304e;
   --logo-colour: #489846;
   --divider-colour: #35e4cf;
   scroll-behavior: smooth;
@@ -508,7 +508,7 @@ footer {
   text-align: center;
 }
 
-/* Check Cart */
+/* Cart */
 .check {
   font-size: 18px;
   position: fixed;
@@ -517,9 +517,9 @@ footer {
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 100
+  z-index: 100;
 }
-.check .container{
+.check .container {
   text-align: right;
   position: relative;
   margin: 0 auto;
@@ -527,10 +527,11 @@ footer {
   overflow: auto;
   top: 18%;
   bottom: 0;
-  height: 70vh;
+  height: auto;
+  max-height: 70vh;
   background-color: rgba(255, 255, 255);
 }
-.check h3{
+.check h3 {
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
@@ -538,37 +539,59 @@ footer {
 }
 .check .row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+}
+.check .row {
+  grid-template-columns: 0.5fr 2fr 1fr 1fr 1.5fr;
 }
 .check .row:hover {
   background-color: rgb(250, 229, 221);
 }
-.check .row div {
+.check .row {
+  align-items: center;
   border-bottom: 1px solid var(--btn-bg-colour);
   padding: 10px;
 }
-.check .container__head {
-  padding-right: 5px;
-}
-.check .container__head,
-.check .container__foot {
-  font-weight: 600;
+.check .delete {
+  margin-right: 10px;
+  padding: 5px;
+  justify-self: center;
+  font-size: 14px;
 }
 .check .title {
   text-align: left;
 }
-.check button {
-  margin: 20px 5px 0;
-  padding: 10px 20px;
+.check button,
+.check a {
   border: transparent;
   border-radius: 5px;
-  background-color: var(--btn-bg-colour);
   color: white;
+  cursor: pointer;
+  background-color: var(--btn-bg-colour);
 }
-.check button:hover {
+.container__head,
+.container__foot {
+  font-weight: 600;
+}
+.container__body input{
+  margin-right: 3px;
+  text-align: right;
+  width: 40px;
+}
+.container__function {
+  margin-top: 30px;
+}
+.container__function a {
+  display: inline-block;
+}
+.container__function button,
+.container__function a {
+  margin: 20px 5px 0;
+  padding: 10px 20px;
+}
+.check button:hover,
+.check a:hover {
   background-color: var(--btn-hover-colour);
 }
-
 
 /* user */
 .user {

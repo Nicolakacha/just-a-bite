@@ -1,8 +1,17 @@
-const formatter = new Intl.NumberFormat('zh-TW' , {
+const formatter = new Intl.NumberFormat('zh-TW', {
   style: 'currency',
   currency: 'NTD',
-  minimumFractionDigits: 0
+  minimumFractionDigits: 0,
 });
+
+function initCart() {
+  if (localStorage.number > 0) {
+    document.querySelector('.count').classList.remove('hide');
+    document.querySelector('.count').innerText = localStorage.number;
+  } else {
+    localStorage.setItem('number', 0);
+  }
+}
 
 function addCart(target) {
   if (target.className == 'add-cart__btn') {
@@ -16,21 +25,12 @@ function addCart(target) {
 
     countDOM.innerText = localStorage.number;
     countDOM.classList.remove('hide');
-
+    
     if (localStorage[`${product}`]) {
       localStorage.setItem(product, Number(localStorage[`${product}`]) + 1);
     } else {
       localStorage.setItem(product, 1);
     }
-  }
-}
-
-function countCart() {
-  if (localStorage.number > 0) {
-    document.querySelector('.count').classList.remove('hide');
-    document.querySelector('.count').innerText = localStorage.number;
-  } else {
-    localStorage.setItem('number', 0);
   }
 }
 
@@ -55,24 +55,23 @@ function getCart() {
     .then((res) => res.json())
     .then((data) => {
       if (localStorage.number != 0) {
-        renderCart(data);
+        renderCheck(data);
       }
     })
     .catch((err) => console.log(err));
 }
 
-function renderCart(data) {
+function renderCheck(data) {
   const checkCart = document.querySelector('.check');
   const checkHead = document.querySelector('.container__head');
   const checkBody = document.querySelector('.container__body');
   const checkFoot = document.querySelector('.container__foot');
   const template = `
-  <div class="row head">
+    <div></div>
     <div class="title">名&nbsp;&nbsp;稱</div>
     <div class="price">價&nbsp;&nbsp;格</div>
     <div class="quantity">數&nbsp;&nbsp;量</div>
-    <div class="amount">金&nbsp;&nbsp;額</div>
-  </div>`;
+    <div class="amount">金&nbsp;&nbsp;額</div>`;
   let total = 0;
   let amount = 0;
 
@@ -83,6 +82,8 @@ function renderCart(data) {
 
   // render head
   const headEl = document.createElement('div');
+  headEl.classList.add('row');
+  headEl.classList.add('head');
   headEl.innerHTML = template;
   checkHead.appendChild(headEl);
 
@@ -91,12 +92,18 @@ function renderCart(data) {
     amount += product.price * product.quantity;
     total += Number(product.quantity);
     const bodyEl = document.createElement('div');
+    bodyEl.classList.add('row');
+    bodyEl.classList.add('body');
+    bodyEl.setAttribute('data-id', product.id);
     const body = template
-      .replace('head', '')
+      .replace('<div></div>', '<button class="delete">刪除</button>')
       .replace('名&nbsp;&nbsp;稱', product.title)
       .replace('價&nbsp;&nbsp;格', formatter.format(product.price))
-      .replace('數&nbsp;&nbsp;量', product.quantity + ' 份')
-      .replace('金&nbsp;&nbsp;額', formatter.format(product.price * product.quantity));
+      .replace('數&nbsp;&nbsp;量', `${product.quantity} 份`)
+      .replace(
+        '金&nbsp;&nbsp;額',
+        formatter.format(product.price * product.quantity)
+      );
     bodyEl.innerHTML = body;
     checkBody.appendChild(bodyEl);
   });
@@ -106,9 +113,10 @@ function renderCart(data) {
   const foot = template
     .replace('名&nbsp;&nbsp;稱', '總&nbsp;&nbsp;&nbsp;計：')
     .replace('價&nbsp;&nbsp;格', '')
-    .replace('head', 'total')
-    .replace('數&nbsp;&nbsp;量', total + ' 份')
+    .replace('數&nbsp;&nbsp;量', `共  ${total} 份`)
     .replace('金&nbsp;&nbsp;額', formatter.format(amount));
+  footEl.classList.add('row');
+  footEl.classList.add('foot');
   footEl.innerHTML = foot;
   checkFoot.appendChild(footEl);
 
@@ -117,32 +125,59 @@ function renderCart(data) {
   document.querySelector('.cart').classList.add('hide');
 }
 
-function toggle(target, checkCart) {
+function toggleCheck(target) {
+  const checkCart = document.querySelector('.check');
   const checkCartContainer = document.querySelector('.container');
-  if (checkCart == checkCartContainer || checkCartContainer.contains(target)) {
-  } else {
+  if (target == checkCart && target != checkCartContainer) {
     checkCart.classList.add('hide');
     document.querySelector('.cart').classList.remove('hide');
   }
 }
 
-function clearCart(checkCart) {
+function clearCart() {
+  const checkCart = document.querySelector('.check');
   localStorage.clear();
   checkCart.classList.add('hide');
   document.querySelector('.cart').classList.remove('hide');
   document.querySelector('.count').classList.add('hide');
-  countCart();
+  initCart();
 }
 
-function init() {
-  countCart();
-  const checkCart = document.querySelector('.check');
-  document.addEventListener('click', (e) => toggle(e.target, checkCart));
-  if (document.querySelector('.products')) {
-    document.querySelector('.products').addEventListener('click', (e) => addCart(e.target, checkCart));
+function removeProduct(target) {
+  if (target.className == 'delete') {
+    const id = target.parentNode.getAttribute('data-id');
+    const originalQty = document.querySelector('.foot .quantity').innerText.match(/\d+/g).map(Number)[0];
+    const removedItemQty = localStorage[`${id}`]
+    const originalAmountArr = document.querySelector('.foot .amount').innerText.match(/\d/g).map(Number);
+    const removedItemAmountArr = target.parentNode.querySelector('.amount').innerText.match(/\d/g).map(Number);
+
+    originalAmount = '';
+    removedAmount = '';
+    
+    originalAmountArr.forEach(number => originalAmount += number);
+    removedItemAmountArr.forEach(number => removedAmount += number);
+    
+    document.querySelector('.foot .quantity').innerText = `共 ${Number(originalQty) - Number(removedItemQty)} 份`
+    document.querySelector('.foot .amount').innerText = formatter.format(Number(originalAmount) - Number(removedAmount));
+    document.querySelector('.count').innerText = localStorage.number;
+    
+    target.parentNode.parentNode.removeChild(target.parentNode);
+    localStorage.removeItem(id);
+    localStorage.number -= Number(removedItemQty);
+    if (localStorage.number == 0) {
+      document.querySelector('.count').classList.add('hide');
+    }
   }
-  document.querySelector('.clear__cart').addEventListener('click', () => clearCart(checkCart))
-  document.querySelector('.cart').addEventListener('click', getCart);
 }
 
-document.addEventListener('DOMContentLoaded', () => init());
+document.addEventListener('DOMContentLoaded', () => {
+  initCart();
+  document.addEventListener('click', (e) => toggleCheck(e.target));
+  document.querySelector('.cart').addEventListener('click', getCart);
+  document.querySelector('.clear').addEventListener('click', clearCart);
+  document.querySelector('.check .container').addEventListener('click', (e) => removeProduct(e.target));
+  const productsDOM = document.querySelector('.products');
+  if (productsDOM) {
+    productsDOM.addEventListener('click', (e) => addCart(e.target));
+  }
+});
