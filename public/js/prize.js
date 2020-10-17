@@ -10,6 +10,7 @@ function init() {
     alert('系統不穩定，請再試一次');
     reload();
   }
+
   function render(prize) {
     games.style.background = `url(${prize.url}) center / cover no-repeat`;
     game.classList.add('hide');
@@ -17,6 +18,7 @@ function init() {
     prizeName.innerHTML = prize.title;
     prizeContent.innerHTML = prize.content;
   }
+
   function getAPI() {
     return fetch('/getPrize', {
       method: 'GET',
@@ -25,10 +27,11 @@ function init() {
       .then(data => render(data))
       .catch(err => error(err));
   }
+
   function reload() {
     window.location.reload(true);
   }
-
+  
   document.querySelector('.play__game').addEventListener('click', getAPI);
   document.querySelector('.reload').addEventListener('click', reload);
 }

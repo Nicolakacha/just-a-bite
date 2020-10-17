@@ -171,7 +171,7 @@ function init() {
       target.parentNode.parentNode.removeChild(target.parentNode);
       localStorage.removeItem(id);
       localStorage.number -= Number(removedItemQty);
-      
+
       if (localStorage.number == 0) {
         cartDOM.classList.remove('hide');
         checkCartDOM.classList.add('hide');
@@ -190,12 +190,9 @@ function init() {
   document.querySelector('.cart').addEventListener('click', getCart);
   document.querySelector('.clear').addEventListener('click', clearCart);
   document.querySelector('.back__menu').addEventListener('click', backToMenu);
-  document
-    .querySelector('.check .container')
-    .addEventListener('click', (e) => removeProduct(e.target));
+  document.querySelector('.check .container').addEventListener('click', (e) => removeProduct(e.target));
   document.querySelector('.cart').addEventListener('click', getCart);
-  if (productsDOM)
-    productsDOM.addEventListener('click', (e) => addCart(e.target));
+  if (productsDOM) productsDOM.addEventListener('click', (e) => addCart(e.target));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
