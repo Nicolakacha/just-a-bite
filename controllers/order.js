@@ -13,6 +13,7 @@ const orderController = {
           id: product.name,
         },
       });
+      console.log(result.id);
       item.id = result.id;
       item.title = result.title;
       item.price = result.price;
