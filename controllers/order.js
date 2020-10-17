@@ -9,7 +9,7 @@ const orderController = {
     let resultArr = [];
     for (let i = 0; i < clientResult.length; i++) {
       let item = {};
-      Menu.findOne({
+      await Menu.findOne({
         where: {
           id: clientResult[i].id,
         },
