@@ -20,6 +20,7 @@ const orderController = {
       resultArr.push(item);
       if (index == clientResult.length - 1) {
         res.status(200).json(resultArr);
+        console.log(clientResult)
         console.log(resultArr)
       }
     });
