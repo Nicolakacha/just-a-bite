@@ -64,10 +64,7 @@ function init() {
       body: JSON.stringify(clientResult),
     })
       .then((res) => res.json())
-      .then((data) => {
-        renderCheck(data)
-        console.log(data);
-      })
+      .then((data) => renderCheck(data))
       .catch((err) => console.log(err));
   }
 
