@@ -19,7 +19,7 @@ const orderController = {
       item.price = result.price;
       item.quantity = product.number;
       resultArr.push(item);
-      console.log('originalArr' + resultArr);
+      console.log(resultArr);
       if (index == clientResult.length - 1) {
         console.log(resultArr);
         res.status(200).json(resultArr);
