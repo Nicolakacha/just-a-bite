@@ -13,16 +13,14 @@ const orderController = {
           id: product.name,
         },
       });
-      setTimeout(() => {
-        item.id = result.id;
-        item.title = result.title;
-        item.price = result.price;
-        item.quantity = product.number;
-        resultArr.push(item);
-        if (index == clientResult.length - 1) {
-          return res.status(200).json(resultArr);
-        }
-      }, 1000);
+      item.id = result.id;
+      item.title = result.title;
+      item.price = result.price;
+      item.quantity = product.number;
+      resultArr.push(item);
+      if (index == clientResult.length - 1) {
+        return res.status(200).json(resultArr);
+      }
     });
   },
 
