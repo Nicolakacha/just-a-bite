@@ -65,9 +65,8 @@ function init() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (localStorage.number != 0) {
-          renderCheck(data);
-        }
+        renderCheck(data)
+        console.log(data);
       })
       .catch((err) => console.log(err));
   }
