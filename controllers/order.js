@@ -19,7 +19,8 @@ const orderController = {
       item.quantity = product.number;
       resultArr.push(item);
       if (index == clientResult.length - 1) {
-        return res.status(200).json(resultArr);
+        res.status(200).json(resultArr);
+        console.log(resultArr)
       }
     });
   },
