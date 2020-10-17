@@ -4,25 +4,23 @@ const { Op } = require('sequelize');
 const { Menu } = db;
 
 const orderController = {
-  getCart: (req, res) => {
+  getCart: async (req, res) => {
     const clientResult = req.body;
     let resultArr = [];
-    for (let i = 0; i < clientResult.length; i++) {
+    for await (let product of clientResult) {
       let item = {};
       const result = await Menu.findOne({
         where: {
-          id: clientResult[i].id,
+          id: product.id,
         },
       })
       item.id = result.id;
       item.title = result.title;
       item.price = result.price;
-      item.quantity = clientResult[i].quantity;
+      item.quantity = product.quantity;
       resultArr.push(item);
-      if (i == clientResult.length - 1) {
-        res.status(200).json(resultArr);
-      }
     }
+    res.status(200).json(resultArr);
   },
 
   manageOrder: (req, res) => {
