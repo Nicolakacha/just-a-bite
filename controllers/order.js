@@ -13,12 +13,13 @@ const orderController = {
           id: product.name,
         },
       });
-      console.log(result.id);
+      console.log('resultId: ' + result.id);
       item.id = result.id;
       item.title = result.title;
       item.price = result.price;
       item.quantity = product.number;
       resultArr.push(item);
+      console.log(resultArr);
       if (index == clientResult.length - 1) {
         return res.status(200).json(resultArr);
       }
