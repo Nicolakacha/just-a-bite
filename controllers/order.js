@@ -22,7 +22,7 @@ const orderController = {
         if (index == clientResult.length - 1) {
           return res.status(200).json(resultArr);
         }
-      }, 500);
+      }, 600);
     });
   },
 
