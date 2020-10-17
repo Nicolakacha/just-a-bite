@@ -21,7 +21,8 @@ const orderController = {
       resultArr.push(item);
       console.log(resultArr);
       if (index == clientResult.length - 1) {
-        return res.status(200).json(resultArr);
+        console.log(resultArr);
+        res.status(200).json(resultArr);
       }
     });
   },
