@@ -6,24 +6,25 @@ const orderController = {
   getCart: (req, res) => {
     let resultArr = [];
     const clientResult = req.body;
-    clientResult.forEach( async(product, index) => {
+    clientResult.forEach((product, index) => {
       let item = {};
-      let result = await Menu.findOne({
+      Menu.findOne({
         where: {
           id: product.name,
         },
-      });
-      item.id = result.id;
-      item.title = result.title;
-      item.price = result.price;
-      item.quantity = product.number;
-      console.log(item.id);
-      resultArr.push(item);
-      if (index == clientResult.length - 1) {
-        res.status(200).json(resultArr);
-        console.log(clientResult)
-        console.log(resultArr)
-      }
+      }).then((result) => {
+        item.id = result.id;
+        item.title = result.title;
+        item.price = result.price;
+        item.quantity = product.number;
+        console.log(item.id);
+        resultArr.push(item);
+        if (index == clientResult.length - 1) {
+          res.status(200).json(resultArr);
+          console.log(clientResult);
+          console.log(resultArr);
+        }
+      }).catch(err => console.log(err));
     });
   },
 
