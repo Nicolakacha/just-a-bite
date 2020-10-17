@@ -151,13 +151,12 @@ function init() {
   }
 
   function removeProduct(target) {
-    const id = target.parentNode.getAttribute('data-id');
-    const originalQty = document.querySelector('.foot .quantity').innerText.match(/\d+/g).map(Number)[0];
-    const removedItemQty = localStorage[`${id}`];
-    const originalAmountArr = document.querySelector('.foot .amount').innerText.match(/\d/g).map(Number);
-    const removedItemAmountArr = target.parentNode.querySelector('.amount').innerText.match(/\d/g).map(Number);
-
     if (target.className == 'delete') {
+      const id = target.parentNode.getAttribute('data-id');
+      const originalQty = document.querySelector('.foot .quantity').innerText.match(/\d+/g).map(Number)[0];
+      const removedItemQty = localStorage[`${id}`];
+      const originalAmountArr = document.querySelector('.foot .amount').innerText.match(/\d/g).map(Number);
+      const removedItemAmountArr = target.parentNode.querySelector('.amount').innerText.match(/\d/g).map(Number);
       originalAmount = '';
       removedAmount = '';
       originalAmountArr.forEach(number => originalAmount += number);
