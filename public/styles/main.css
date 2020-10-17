@@ -543,9 +543,6 @@ footer {
 .check .row {
   grid-template-columns: 0.5fr 2fr 1fr 1fr 1.5fr;
 }
-.check .row:hover {
-  background-color: rgb(250, 229, 221);
-}
 .check .row {
   align-items: center;
   border-bottom: 1px solid var(--btn-bg-colour);
@@ -571,6 +568,9 @@ footer {
 .container__head,
 .container__foot {
   font-weight: 600;
+}
+.container__body .row:hover {
+  background-color: rgb(244, 251, 202);
 }
 .container__body input{
   margin-right: 3px;
