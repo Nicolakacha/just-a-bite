@@ -6,7 +6,7 @@ const orderController = {
   getCart: (req, res) => {
     let resultArr = [];
     const clientResult = req.body;
-    clientResult.forEach(async (product, index) => {
+    clientResult.forEach( async(product, index) => {
       let item = {};
       let result = await Menu.findOne({
         where: {
@@ -22,7 +22,7 @@ const orderController = {
         if (index == clientResult.length - 1) {
           return res.status(200).json(resultArr);
         }
-      }, 300);
+      }, 500);
     });
   },
 
