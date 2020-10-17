@@ -64,7 +64,11 @@ function init() {
       body: JSON.stringify(clientResult),
     })
       .then((res) => res.json())
-      .then((data) => renderCheck(data))
+      .then((data) => {
+        if (localStorage.number > 0) {
+          renderCheck(data);
+        }
+      })
       .catch((err) => console.log(err));
   }
 
