@@ -22,7 +22,7 @@ const orderController = {
       console.log(resultArr);
       if (index == clientResult.length - 1) {
         console.log(resultArr);
-        res.status(200).json(resultArr);
+        res.status(200).json('res:' + resultArr);
       }
     });
   },
