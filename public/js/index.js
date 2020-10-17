@@ -51,8 +51,8 @@ function init() {
     for (item in total) {
       if (isNaN(Number(item)) == false) {
         let product = {};
-        product.name = item;
-        product.number = total[item];
+        product.id = item;
+        product.quantity = total[item];
         clientResult.push(product);
       }
     }
