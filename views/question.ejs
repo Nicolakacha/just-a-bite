@@ -13,15 +13,17 @@
       <div class="section">
         <h2 class="section__title">FAQ - 常見問題</h2>
 
+        <% let i = 1 %> 
         <% questions.forEach(question => { %>
-        <div class="group" data-id="<%= question.order %>">
-          <div class="question">
-            <div>Q<%= question.order %>:&nbsp</div>
-            <div class="question__text"><%= question.question %></div>
-          </div>
+          <div class="group">
+            <div class="question">
+              <div>Q<%= i %>:&nbsp</div>
+              <div class="question__text"><%= question.question %></div>
+            </div>
 
-          <div class="answer hide"><%= question.answer %></div>
-        </div>
+            <div class="answer hide"><%= question.answer %></div>
+          </div>
+          <% i++ %>
         <% }) %>
       </div>
     </section>
