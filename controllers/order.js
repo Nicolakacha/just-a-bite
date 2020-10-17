@@ -22,6 +22,7 @@ const orderController = {
       if (i == clientResult.length - 1) {
         res.status(200).json(resultArr);
       }
+    }
   },
 
   manageOrder: (req, res) => {
