@@ -646,14 +646,18 @@ footer {
 
 /* manage */
 .manage {
-  margin: 150px 40px 40px;
+  margin: 95px 40px 0;
   text-align: center;
   color: var(--btn-bg-colour);
+}
+.manage h1 {
+  font-size: 26px;
 }
 .manage > p {
   margin-top: 20px;
 }
 .manage .manage__title a {
+  display: inline-block;
   padding: 10px;
   border-radius: 10px;
   color: white;
@@ -681,8 +685,7 @@ footer {
   color: #fa3e5b;
 }
 .manage__list {
-  margin: 20px 50px;
-  padding: 10px 0;
+  margin: 10px 50px 20px;
 }
 .manage__list h3 {
   font-size: 22px;
@@ -761,19 +764,43 @@ footer {
 .manage__list .url a:hover {
   color: #faa5a5;
 }
+.manage__edit {
+  font-size: 0.8rem;
+}
 .manage__edit div {
-  margin: 10px 0;
+  margin: 5px 0;
 }
 .manage__edit input,
 .manage__edit textarea {
-  margin-top: 10px;
+  margin-top: 5px;
   border-radius: 10px;
   padding: 6px;
-  font-size: 18px;
+  font-size: 14px;
+  height: 20px;
   border: 1px solid var(--btn-bg-colour);
-  width: 600px;
+  width: 500px;
 }
-
+.manage__edit .image input {
+  margin-bottom: 10px;
+  border: none;
+}
+.image__block {
+  height: 150px;
+}
+.image__block img{
+  max-height: 100%;
+}
+.image__upload::-webkit-file-upload-button {
+  margin-left: 30%;
+  color: white;
+  display: inline-block;
+  background: var(--btn-bg-colour);
+  border: none;
+  padding: 7px 15px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
 /* Others */
 .hide {
   display: none;

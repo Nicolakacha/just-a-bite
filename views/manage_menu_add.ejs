@@ -2,17 +2,24 @@
 <html lang="zh-TW">
   <head>
     <%- include ('templates/head') %>
+    <script type="text/javascript" src="/js/upload_picture.js"></script>
   </head>
 
   <body>
     <%- include ('templates/nav_manage') %>
-    
+
     <div class="manage">
-      
       <h1>新增餐點</h1>
 
       <form method="POST" class="manage__edit" action="/manage/menu/add">
-        
+        <div class="image">
+          <div class="image__block">
+            <img id="image" src="/images/upload.png" alt="">
+          </div>
+          <input class="image__url" hidden type="text" name="url" value="" readonly />
+          <input class="image__upload" type="file"/>
+        </div>
+
         <div class="title">
           <h3>餐點名稱</h3>
           <input type="text" name="title" maxlength="20" />
@@ -22,16 +29,10 @@
           <h3>價格（請填數字）</h3>
           <input type="num" min="1" max="5000" name="price" />
         </div>
-        
-        <div class="url">
-          <h3>Imgur 圖片網址</h3>
-          <input type="text" name="url" />
-        </div>
 
         <div class="order">
-          <h3>順序（請填數字）</h3>
-          <p class="manage__explain">順序需在數字 1 ~ 99 之間</p>
-          <input type="number" min="1" max="100" name="order"/>
+          <h3>順序（請填數字，順序需在數字 1 ~ 99 之間）</h3>
+          <input type="number" min="1" max="100" name="order" />
         </div>
 
         <div class="remind">
@@ -41,9 +42,7 @@
         <div class="post__btn">
           <button type="submit" class="edit-post__btn">送出</button>
         </div>
-
       </form>
-      
     </div>
   </body>
 </html>

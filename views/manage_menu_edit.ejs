@@ -2,6 +2,7 @@
 <html lang="zh-TW">
   <head>
     <%- include ('templates/head') %>
+    <script type="text/javascript" src="/js/upload_picture.js"></script>
   </head>
 
   <body>
@@ -12,6 +13,14 @@
       <h1>編輯餐點</h1>
 
       <form method="POST" class="manage__edit" action="/manage/menu/edit/<%= menu.id %>">
+
+        <div class="image">
+          <div class="image__block">
+            <img id="image" src="<%= menu.url %>" alt="">
+          </div>
+          <input class="image__url" hidden type="text" name="url" value="<%= menu.url %>" readonly />
+          <input class="image__upload" type="file"/>
+        </div>
         
         <div class="title">
           <h3>餐點名稱</h3>
@@ -21,11 +30,6 @@
         <div class="content">
           <h3>價格（請填數字）</h3>
           <input type="num" min="1" max="5000" name="price" value="<%= menu.price %>"/>
-        </div>
-        
-        <div class="url">
-          <h3>Imgur 圖片網址</h3>
-          <input type="text" name="url" value="<%= menu.url %>"/>
         </div>
         
         <div class="order">
