@@ -646,7 +646,7 @@ footer {
 
 /* manage */
 .manage {
-  margin: 95px 40px 0;
+  margin: 100px 40px 0;
   text-align: center;
   color: var(--btn-bg-colour);
 }
@@ -785,7 +785,7 @@ footer {
   border: none;
 }
 .image__block {
-  height: 150px;
+  height: 23vh;
 }
 .image__block img{
   max-height: 100%;
@@ -876,6 +876,9 @@ footer {
   }
   .products {
     padding: 0;
+  }
+  .manage {
+    padding-top: 40px;
   }
   .location .section {
     padding: 20px 0;
