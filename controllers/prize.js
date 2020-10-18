@@ -11,7 +11,7 @@ const prizeController = {
     Prize.findAll({
       order: [['weight']],
     })
-      .then((prizes) => res.render('prize_game', { prizes }))
+      .then(prizes => res.render('prize_game', { prizes }))
       .catch((err) => {
         console.log(err);
         return res.send('網頁維修中');
@@ -22,7 +22,7 @@ const prizeController = {
     Prize.findAll({
       order: [['weight']],
     })
-      .then((prizes) => res.render('manage_prize', { prizes }))
+      .then(prizes => res.render('manage_prize', { prizes }))
       .catch(() => res.redirect('/'));
   },
 
@@ -45,23 +45,23 @@ const prizeController = {
         });
       })
       .then((prizeYouGet) => {
-        let result = {
+        const result = {
           title: prizeYouGet.title,
           content: prizeYouGet.content,
           url: prizeYouGet.url,
         };
         return res.status(200).json(result);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   },
 
-  add: (req, res) => {
-    return res.render('manage_prize_add');
-  },
+  add: (req, res) => res.render('manage_prize_add'),
 
   handleAdd: (req, res) => {
-    const { title, content, url, weight } = req.body;
-    if (title == '' || content == '' || url == '' || weight <= 0) {
+    const {
+      title, content, url, weight,
+    } = req.body;
+    if (title === '' || content === '' || url === '' || weight <= 0) {
       req.flash('errorMessage', '該填的沒填哦');
       return res.redirect('/manage/prize/add');
     }
@@ -87,7 +87,7 @@ const prizeController = {
 
   edit: (req, res, next) => {
     Prize.findByPk(req.params.id)
-      .then((prize) => res.render('manage_prize_edit', { prize }))
+      .then(prize => res.render('manage_prize_edit', { prize }))
       .catch((err) => {
         console.log(err);
         return next();
@@ -95,30 +95,34 @@ const prizeController = {
   },
 
   handleEdit: (req, res) => {
-    const { title, content, url, weight } = req.body;
-    if (title == '' || content == '' || url == '' || weight <= 0) {
+    const {
+      title, content, url, weight,
+    } = req.body;
+    if (title === '' || content === '' || url === '' || weight <= 0) {
       req.flash('errorMessage', '該填的沒填哦');
       return res.redirect(`/manage/prize/edit/${req.params.id}`);
     }
     Prize.findByPk(req.params.id)
-    .then((prize) => {
-      prize
-        .update({ title, content, url, weight })
-        .then(() => {
-          console.log('update successfully');
-          return res.redirect('/manage/prize');
-        })
-        .catch((err) => {
-          if (err.original.errno === 1062) {
-            req.flash('errorMessage', '權重數不可以重複啦');
-            return res.redirect(`/manage/prize/edit/${req.params.id}`);
-          }
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.redirect(`/manage/prize/edit/${req.params.id}`);
-    });
+      .then((prize) => {
+        prize
+          .update({
+            title, content, url, weight,
+          })
+          .then(() => {
+            console.log('update successfully');
+            return res.redirect('/manage/prize');
+          })
+          .catch((err) => {
+            if (err.original.errno === 1062) {
+              req.flash('errorMessage', '權重數不可以重複啦');
+              return res.redirect(`/manage/prize/edit/${req.params.id}`);
+            }
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.redirect(`/manage/prize/edit/${req.params.id}`);
+      });
   },
 
   delete: (req, res) => {

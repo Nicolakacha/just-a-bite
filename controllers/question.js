@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 const db = require('../models');
+
 const { Question } = db;
 
 const questionController = {
@@ -7,7 +8,7 @@ const questionController = {
     Question.findAll({
       order: [['order']],
     })
-      .then((questions) => res.render('question', { questions }))
+      .then(questions => res.render('question', { questions }))
       .catch(() => res.redirect('/'));
   },
 
@@ -15,17 +16,15 @@ const questionController = {
     Question.findAll({
       order: [['order']],
     })
-      .then((questions) => res.render('manage_question', { questions }))
+      .then(questions => res.render('manage_question', { questions }))
       .catch(() => res.redirect('/'));
   },
 
-  add: (req, res) => {
-    return res.render('manage_question_add');
-  },
+  add: (req, res) => res.render('manage_question_add'),
 
   handleAdd: (req, res) => {
     const { question, answer, order } = req.body;
-    if (question == '' || answer == '' || order <= 0) {
+    if (question === '' || answer === '' || order <= 0) {
       req.flash('errorMessage', '該填的沒填哦');
       return res.redirect('/manage/question/add');
     }
@@ -51,7 +50,7 @@ const questionController = {
 
   edit: (req, res, next) => {
     Question.findByPk(req.params.id)
-      .then((question) => res.render('manage_question_edit', { question }))
+      .then(question => res.render('manage_question_edit', { question }))
       .catch((err) => {
         console.log(err);
         return next();
@@ -60,7 +59,7 @@ const questionController = {
 
   handleEdit: (req, res) => {
     const { question, answer, order } = req.body;
-    if (question == '' || answer == '' || order <= 0) {
+    if (question === '' || answer === '' || order <= 0) {
       req.flash('errorMessage', '該填的沒填哦');
       return res.redirect(`/manage/question/edit/${req.params.id}`);
     }

@@ -13,7 +13,7 @@ function init() {
       },
       body: formData,
     })
-      .then((data) => data.json())
+      .then(data => data.json())
       .then((data) => {
         urlDOM.value = data.data.link;
         imageDOM.src = data.data.link;

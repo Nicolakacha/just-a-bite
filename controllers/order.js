@@ -1,19 +1,20 @@
-/* eslint-disable consistent-return */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable prefer-const */
 const db = require('../models');
-const { Op } = require('sequelize');
+
 const { Menu } = db;
 
 const orderController = {
   getCart: async (req, res) => {
     const clientResult = req.body;
-    let resultArr = [];
+    const resultArr = [];
     for await (let product of clientResult) {
       let item = {};
       const result = await Menu.findOne({
         where: {
           id: product.id,
         },
-      })
+      });
       item.id = result.id;
       item.title = result.title;
       item.price = result.price;

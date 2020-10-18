@@ -3,11 +3,16 @@ function init() {
   const games = document.querySelector('.games');
   const prizeName = document.querySelector('.name');
   const prizeContent = document.querySelector('.content');
-  const game = document.querySelector('.game')
+  const game = document.querySelector('.game');
   const playPage = document.querySelector('.prize__game');
+
+  function reload() {
+    window.location.reload(true);
+  }
 
   function error(err) {
     alert('系統不穩定，請再試一次');
+    console.log(err);
     reload();
   }
 
@@ -28,10 +33,6 @@ function init() {
       .catch(err => error(err));
   }
 
-  function reload() {
-    window.location.reload(true);
-  }
-  
   document.querySelector('.play__game').addEventListener('click', getAPI);
   document.querySelector('.reload').addEventListener('click', reload);
 }

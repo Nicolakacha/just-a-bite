@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 const express = require('express');
 const session = require('express-session');
 const routes = require('./routes');
@@ -16,7 +17,7 @@ app.use(
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-  })
+  }),
 );
 
 app.use((req, res, next) => {

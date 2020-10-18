@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 const db = require('../models');
+
 const { Menu } = db;
 
 const menuController = {
@@ -7,7 +8,7 @@ const menuController = {
     Menu.findAll({
       order: [['order']],
     })
-      .then((menus) => res.render('menu', { menus }))
+      .then(menus => res.render('menu', { menus }))
       .catch((err) => {
         console.log(err);
         return res.send('網頁維修中');
@@ -19,24 +20,26 @@ const menuController = {
     Menu.findAll({
       order: [['order']],
     })
-      .then((menus) => res.render('manage_menu', { menus }))
+      .then(menus => res.render('manage_menu', { menus }))
       .catch((err) => {
         console.log(err);
         res.redirect('/');
       });
   },
 
-  add: (req, res) => {
-    return res.render('manage_menu_add');
-  },
+  add: (req, res) => res.render('manage_menu_add'),
 
   handleAdd: (req, res) => {
-    const { title, price, url, order } = req.body;
-    if (title == '' || price == '' || url == '' || order == '') {
+    const {
+      title, price, url, order,
+    } = req.body;
+    if (title === '' || price === '' || url === '' || order === '') {
       req.flash('errorMessage', '該填的沒填哦');
       return res.redirect('/manage/menu/add');
     }
-    Menu.create({ title, price, url, order })
+    Menu.create({
+      title, price, url, order,
+    })
       .then(() => {
         console.log('add successfully');
         return res.redirect('/manage/menu');
@@ -53,7 +56,7 @@ const menuController = {
 
   edit: (req, res, next) => {
     Menu.findByPk(req.params.id)
-      .then((menu) => res.render('manage_menu_edit', { menu }))
+      .then(menu => res.render('manage_menu_edit', { menu }))
       .catch((err) => {
         console.log(err);
         return next();
@@ -61,15 +64,19 @@ const menuController = {
   },
 
   handleEdit: (req, res) => {
-    const { title, price, url, order } = req.body;
-    if (title == '' || price == '' || url == '' || order == '') {
+    const {
+      title, price, url, order,
+    } = req.body;
+    if (title === '' || price === '' || url === '' || order === '') {
       req.flash('errorMessage', '該填的沒填哦');
       return res.redirect('/manage/menu/add');
     }
     Menu.findByPk(req.params.id)
       .then((menu) => {
         menu
-          .update({ title, price, url, order })
+          .update({
+            title, price, url, order,
+          })
           .then(() => {
             console.log('update successfully');
             return res.redirect('/manage/menu');
