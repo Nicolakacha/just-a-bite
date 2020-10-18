@@ -364,12 +364,12 @@ footer {
 }
 .products {
   margin-top: -80px;
-  padding: 100px 10% 0px;
+  padding: 70px 10% 0px;
 }
 .products .section {
   display: grid;
   grid-gap: 40px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 .product {
   color: #3f633c;
@@ -390,11 +390,13 @@ footer {
 .product .add-cart button:hover {
   background-color: rgb(231, 255, 232);
 }
-.product .picture img {
-  width: 100%;
-  height: auto;
+.product .picture {
+  height: 250px;
+  overflow: hidden;
 }
-
+.product .picture img {
+  height: 100%;
+}
 /* question */
 .questions {
   margin: 120px 0 220px 0;
@@ -876,7 +878,7 @@ footer {
     width: 100%;
   }
   .products {
-    padding: 0;
+    padding-bottom: 0px;
   }
   .manage {
     padding-top: 40px;
@@ -910,6 +912,6 @@ footer {
     padding: 50px 0;
   }
   .products .section {
-    padding: 100px 20px;
+    padding: 100px 20px 0px;
   }
 }
