@@ -780,8 +780,6 @@ footer {
   margin-top: 5px;
   border-radius: 10px;
   padding: 6px;
-  font-size: 14px;
-  height: 20px;
   border: 1px solid var(--btn-bg-colour);
   width: 500px;
 }
