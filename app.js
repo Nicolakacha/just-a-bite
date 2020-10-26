@@ -16,9 +16,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(compression());
 app.use(express.static(`${__dirname}/public`));
+app.use(flash());
+
 app.use(globalSTS);
 app.use(helmet());
-app.use(flash());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", "maxcdn.bootstrapcdn.com"],
+      childSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "maxcdn.bootstrapcdn.com"],
+      frameSrc: ["'self'", "www.google.com"],
+      imgSrc: ["'self'", "i.imgur.com"],
+    },
+  })
+);
+
+
 app.use(
   session({
     secret: 'keyboard cat',
