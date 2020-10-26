@@ -1,6 +1,3 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable prefer-const */
 const formatter = new Intl.NumberFormat('zh-TW', {
   style: 'currency',
   currency: 'NTD',

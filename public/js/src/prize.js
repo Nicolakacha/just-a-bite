@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 function init() {
   const games = document.querySelector('.games');
   const prizeName = document.querySelector('.name');
