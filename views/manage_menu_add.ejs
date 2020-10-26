@@ -2,7 +2,7 @@
 <html lang="zh-TW">
   <head>
     <%- include ('templates/head') %>
-    <script type="text/javascript" src="/dist/js/upload_picture.min.js"  ></script>
+    <script type="text/javascript" src="/dist/js/upload_picture.min.js"  >defer </script>
   </head>
 
   <body>
@@ -14,7 +14,7 @@
       <form method="POST" class="manage__edit" action="/manage/menu/add">
         <div class="image">
           <div class="image__block">
-            <img id="image" src="/dist/img/upload.png" alt="">
+            <img id="image" src="/dist/img/upload.jpg" alt="">
           </div>
           <input class="image__url" hidden type="text" name="url" value="" readonly />
           <input class="image__upload" type="file"/>
