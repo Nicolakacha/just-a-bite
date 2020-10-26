@@ -25,7 +25,7 @@ app.use(
     directives: {
       defaultSrc: ["'self'", "maxcdn.bootstrapcdn.com"],
       childSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "maxcdn.bootstrapcdn.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "maxcdn.bootstrapcdn.com", "i.imgur.com"],
       frameSrc: ["'self'", "www.google.com"],
       imgSrc: ["'self'", "i.imgur.com"],
     },
