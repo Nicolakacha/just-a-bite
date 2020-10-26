@@ -1,12 +1,30 @@
 const { src, dest, series, parallel } = require('gulp');
+const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
+const cleanCSS = require('gulp-clean-css');
+const imgMin = require('gulp-imagemin');
 
-function defaultTask() {
-  return src('public/js/src/*.js')
+
+function compileJS() {
+  return src('public/src/js/*.js')
+    .pipe(babel({presets: ['@babel/env']}))
     .pipe(uglify())
-		.pipe(rename({extname: '.min.js'}))
-    .pipe(dest('public/js/dist'));
+    .pipe(rename({ extname: '.min.js' }))
+    .pipe(dest('public/dist/js'));
 }
 
-exports.default = defaultTask;
+function compileCSS() {
+  return src('public/src/css/*.css')
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(rename({ extname: '.min.css' }))
+    .pipe(dest('public/dist/css'))
+}
+
+function minifyImg() {
+  return src('public/src/img/*')
+    .pipe(imgMin())
+    .pipe(dest('public/dist/img/'))
+}
+
+exports.default = parallel(compileCSS, compileJS, minifyImg);
